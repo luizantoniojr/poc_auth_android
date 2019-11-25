@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.pocs.poc_auth_android"
+        minSdkVersion 28
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                'appAuthRedirectScheme': 'com.pocs.poc_auth_android'
+        ]
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildTypes.each {
+        it.buildConfigField 'String', 'CLIENT_ID', clientId
+        it.buildConfigField 'String', 'CLIENT_SECRET', clientSecret
+        it.buildConfigField 'String', 'REDIRECT_URI', redirectUri
+        it.buildConfigField 'String', 'SCOPE', scope
+        it.buildConfigField 'String', 'AUTHORIZSTION_END_POINT_URI', authorizationEndpointUri
+        it.buildConfigField 'String', 'TOKEN_END_POINT_URI', tokenEndpointUri
+        it.buildConfigField 'String', 'REGISTRATION_END_POINT_URI', registrationEndpointUri
+        it.buildConfigField 'String', 'RESPONSE_TYPE', responseType
+
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'net.openid:appauth:0.7.1'
+}
