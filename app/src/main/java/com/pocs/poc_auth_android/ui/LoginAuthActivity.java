@@ -29,7 +29,6 @@ public class LoginAuthActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_login_auth);
 
-
         final AuthorizationResponse resp = AuthorizationResponse.fromIntent(getIntent());
         AuthorizationException ex = AuthorizationException.fromIntent(getIntent());
 
@@ -65,10 +64,7 @@ public class LoginAuthActivity extends AppCompatActivity {
                     }
                 }
             });
-
-            // authorization completed
         } else {
-            // authorization failed, check ex for more details
             Intent loginIntent = new Intent(LoginAuthActivity.this, LoginActivity.class);
             startActivity(loginIntent);
             finish();

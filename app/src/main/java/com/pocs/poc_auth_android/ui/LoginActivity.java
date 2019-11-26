@@ -29,13 +29,13 @@ public class LoginActivity extends AppCompatActivity {
         AuthorizationService authService = authManager.getAuthService();
         Auth auth = authManager.getAuth();
 
+        Uri redirectUri = Uri.parse(auth.getRedirectUri());
         AuthorizationRequest.Builder authRequestBuilder = new AuthorizationRequest
                 .Builder(
                 authManager.getAuthConfig(),
                 auth.getClientId(),
                 auth.getResponseType(),
-                Uri.parse(auth.getRedirectUri()))
-                .setScope(auth.getScope());
+                redirectUri).setScope(auth.getScope());
 
         String codeVerifier = CodeVerifierUtil.generateRandomCodeVerifier();
         SharedPreferencesRepository sharedPreferencesRepository = new SharedPreferencesRepository(this);
